@@ -12,6 +12,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   
+  List toDoList = [
+    ["TalentMind StandUp" , false],
+    ["Workout" , true],
+  ];
 
   
 
@@ -30,13 +34,16 @@ class _MyHomePageState extends State<MyHomePage> {
         centerTitle: true,
         title: Text(widget.title),
       ),
-      body: ListView(
-        children: const   [
-          ToDoTile(taskName: 'TalentMind StandUp', taskIsCompleted: true,),
-          ToDoTile(taskName: 'Go to the gym', taskIsCompleted: false,),
-        ],
-
-      )
+      body: ListView.builder(
+        itemCount: toDoList.length,
+        itemBuilder: (context, index) {
+          return ToDoTile(
+            taskName: toDoList[index][0],
+            taskIsCompleted: toDoList[index][1]
+            );
+        },
+        
+        )
        // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

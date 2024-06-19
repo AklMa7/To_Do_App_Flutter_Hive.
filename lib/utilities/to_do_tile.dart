@@ -15,14 +15,14 @@ class ToDoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(25.0),
+      padding: const EdgeInsets.symmetric(horizontal: 25.0 , vertical: 13),
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primary.withOpacity(0.7),
           borderRadius: BorderRadius.circular(15)
         ),
         child:  Padding(
-          padding:  const EdgeInsets.all(25.0),
+          padding:  const EdgeInsets.symmetric(horizontal: 25.0 , vertical: 13),
           child:  Row(
             children: [
               //CheckBox
