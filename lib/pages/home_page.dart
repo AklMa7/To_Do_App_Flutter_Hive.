@@ -3,9 +3,10 @@ import 'package:to_do_app/utilities/dialog_box.dart';
 import 'package:to_do_app/utilities/to_do_tile.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
   final String title;
+
+  const MyHomePage({super.key, required this.title});
+  
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -17,8 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
   List toDoList = [
-    ["TalentMind StandUp" , false],
-    ["Workout" , true],
+    
   ];
 
   // CheckBox was tapped ?
@@ -56,11 +56,26 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.of(context).pop();
   }
 
-  void deleteTask( int index){
-    setState(() {
-      toDoList.removeAt(index);
-    });
-  }
+  void deleteTask(BuildContext context, int index) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      elevation: 15,
+      backgroundColor: Colors.greenAccent,
+      content: const Text('Task deleted successfully !', style: TextStyle(color: Colors.black),),
+      duration: const Duration(seconds: 2), 
+      action: SnackBarAction(
+        label: 'Undo',
+        onPressed: () {
+          // Here you can handle undoing the delete action if needed
+          // For simplicity, let's assume we don't handle undo here
+        },
+      ),
+    ),
+  );
+  setState(() {
+    toDoList.removeAt(index);
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
             taskName: toDoList[index][0],
             taskIsCompleted: toDoList[index][1],
             onChanged: (value) =>  checkBoxChangeState( value! , index),
-            onPressed: (context) => deleteTask(index),
+            onPressed: (context) => deleteTask(context ,index),
             );
         },
         
