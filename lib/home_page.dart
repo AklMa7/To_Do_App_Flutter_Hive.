@@ -17,6 +17,15 @@ class _MyHomePageState extends State<MyHomePage> {
     ["Workout" , true],
   ];
 
+  // CheckBox was tapped ?
+
+  void checkBoxChangeState(bool value , int index) {
+    
+    setState(() {
+      toDoList[index][1] = value;
+    });
+  }
+
   
 
   @override
@@ -39,7 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
         itemBuilder: (context, index) {
           return ToDoTile(
             taskName: toDoList[index][0],
-            taskIsCompleted: toDoList[index][1]
+            taskIsCompleted: toDoList[index][1],
+            onChanged: (value) =>  checkBoxChangeState( value! , index),
             );
         },
         
