@@ -13,6 +13,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   
+  final _controller = TextEditingController();
+
+
   List toDoList = [
     ["TalentMind StandUp" , false],
     ["Workout" , true],
@@ -33,13 +36,29 @@ class _MyHomePageState extends State<MyHomePage> {
     showDialog(
       context: context,
       builder: (context) {
-        return const DialogBox();
+        return DialogBox(controller: _controller, onSave: () => saveNewTask(),  onCancel: () => cancelTask(context), );
       }
       );
 
   }
 
   //---------------------
+
+  void saveNewTask(){
+    setState((){
+      toDoList.add( [ _controller.text , false ] );
+      _controller.clear();
+    });
+    Navigator.of(context).pop();
+  }
+
+
+  void cancelTask(BuildContext context) {
+    Navigator.of(context).pop();
+}
+
+
+
 
   @override
   Widget build(BuildContext context) {
