@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:to_do_app/pages/home_page.dart';
 
-void main() {
+void main() async {
+
+  // init the hive ( for local storage)
+  await Hive.initFlutter();
+  //open a box (to store data inside)
+  await Hive.openBox("myBox");
+
   runApp(const MyApp());
 }
 
